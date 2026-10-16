@@ -96,8 +96,10 @@ export default function MapComponent({ currentTime, temperature, weatherConditio
                 >
                     {/* Dark tiles with brightness boost for visible roads */}
                     <TileLayer
-                        // attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                        url={`https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=${process.env.NEXT_CARTO_API_KEY}`}
+                        subdomains="abcd"
+                        maxZoom={18}
                         className="map-tiles-bright"
                     />
 
