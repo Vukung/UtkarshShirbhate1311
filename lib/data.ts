@@ -339,7 +339,7 @@ export const achievements = [
     year: "May 2026",
     description: "Earned the AWS Certified Cloud Practitioner certification, covering cloud fundamentals across compute, storage, networking and security.",
     type: "Certification",
-    link: "https://www.credly.com/badges/b3c95ae1-575e-4981-bc6f-4938226d4796",
+    link: "https://www.credly.com/badges/cec3d94b-537d-4715-9121-1fcbf21eab62",
   },
   {
     title: "AWS Academy Graduate – Cloud Foundation",
