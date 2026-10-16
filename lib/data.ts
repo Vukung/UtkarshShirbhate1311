@@ -11,7 +11,7 @@ export const personalInfo = {
   social: {
     github: "https://github.com/Vukung",
     linkedin: "https://www.linkedin.com/in/UtkarshShirbhate",
-    resume: "/Utkarsh_Shirbhate_Resume.pdf", // RESUME PDF to public folder
+    resume: "/Utkarsh%20Shirbhate%20Resume.pdf", // RESUME PDF to public folder
   },
 
   coordinates: {
@@ -330,7 +330,7 @@ export const achievements = [
     title: "Research Paper: Millet Production Management Using Cloud Computing for Farmers (NCPC 2024)",
     organization: "Sinhgad College of Engineering",
     year: "2024",
-    description: "Presented a paper on 'Millet Production Management Using Cloud Computing for Farmers' during NCPC, contributing to research.",
+    description: "Presented a paper on 'Millet Production Management Using Cloud Computing for Farmers' during National Conference on Power and Control, contributing to research.",
     type: "Academic",
   },
   {
