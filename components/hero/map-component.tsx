@@ -27,8 +27,14 @@ if (typeof window !== "undefined" && !document.getElementById("pulse-keyframes")
         .pulsating-marker {
             animation: pulse 2s ease-in-out infinite;
         }
-        .map-tiles-invert {
-            filter: invert(1) contrast(1.2) brightness(0.4);
+        .map-tiles-readable {
+            filter: contrast(1.05) saturate(0.9);
+        }
+        .leaflet-container,
+        .leaflet-grab,
+        .leaflet-grab.leaflet-dragging,
+        .leaflet-container.leaflet-dragging {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M3 2l13 7-6 2-2 6L3 2z' fill='%23000' stroke='%23fff' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 3 2, auto;
         }
     `;
     document.head.appendChild(style);
@@ -39,6 +45,14 @@ import L from "leaflet";
 import { useMap } from "react-leaflet";
 
 // ... (pulse style and keyframes)
+
+const cartoApiKey = process.env.NEXT_PUBLIC_CARTO_API_KEY;
+const tileUrl = cartoApiKey
+    ? `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=${cartoApiKey}`
+    : "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+const tileAttribution = cartoApiKey
+    ? '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+    : '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
 interface MapComponentProps {
     currentTime: string;
@@ -94,13 +108,12 @@ export default function MapComponent({ currentTime, temperature, weatherConditio
                     style={{ background: "#1a1a1a" }}
                     ref={setMapInstance}
                 >
-                    {/* Dark tiles with brightness boost for visible roads */}
                     <TileLayer
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-                        url={`https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=${process.env.NEXT_CARTO_API_KEY}`}
-                        subdomains="abcd"
+                        attribution={tileAttribution}
+                        url={tileUrl}
+                        subdomains={cartoApiKey ? "abcd" : undefined}
                         maxZoom={18}
-                        className="map-tiles-bright"
+                        className="map-tiles-readable"
                     />
 
                     {/* Location marker - Pulsating blue dot */}
@@ -108,10 +121,10 @@ export default function MapComponent({ currentTime, temperature, weatherConditio
                         center={position}
                         radius={6}
                         pathOptions={{
-                            fillColor: "#8a8ac5ff",
-                            fillOpacity: 0.8,
-                            color: "#60a5fa",
-                            weight: 2,
+                            fillColor: "#2563eb",
+                            fillOpacity: 1,
+                            color: "#ffffff",
+                            weight: 3,
                             className: "pulsating-marker"
                         }}
                     >
@@ -152,16 +165,16 @@ export default function MapComponent({ currentTime, temperature, weatherConditio
                 />
             </motion.div> */}
 
-            {/* Location info overlay - Top Right - Transparent */}
-            <div className="absolute top-4 right-4 z-[1000] px-2 py-1">
-                <div className="flex flex-col gap-1 text-sm font-medium drop-shadow-md">
-                    <div className="flex items-center gap-2 text-gray-200">
-                        <MapPin className="w-4 h-4" />
-                        <span className="font-medium">{personalInfo.location}</span>
+            {/* Location and time overlay */}
+            <div className="absolute top-4 right-4 z-[1000] rounded-xl border border-white/80 bg-white/95 px-4 py-3 text-gray-950 shadow-xl backdrop-blur-sm">
+                <div className="flex flex-col gap-2 text-base font-semibold">
+                    <div className="flex items-center gap-2">
+                        <MapPin className="h-5 w-5 text-blue-700" />
+                        <span>{personalInfo.location}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-gray-200">
-                        <Clock className="w-4 h-4" />
-                        <span className="font-mono">{currentTime}</span>
+                    <div className="flex items-center gap-2">
+                        <Clock className="h-5 w-5 text-blue-700" />
+                        <span className="font-mono text-[1.05rem]">{currentTime}</span>
                     </div>
                     {/* {temperature !== null && (
                         <div className="flex items-center gap-2 text-gray-200">

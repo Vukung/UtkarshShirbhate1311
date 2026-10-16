@@ -16,6 +16,25 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Map configuration
+
+The location map uses Carto's dark tiles when `NEXT_PUBLIC_CARTO_API_KEY` is
+configured. Create a local `.env.local` file (which is ignored by Git) with:
+
+```env
+NEXT_PUBLIC_CARTO_API_KEY=your_carto_api_key
+```
+
+Restart the development server after changing environment variables. In Vercel,
+add the same variable under the appropriate Environment setting
+(Development, Preview, or Production), then redeploy. `NEXT_PUBLIC_` variables
+are included in the browser bundle, so this key must be restricted in Carto to
+your website's allowed domains and usage limits. It should not be treated as a
+server-only secret.
+
+If the variable is not available, the map automatically uses OpenStreetMap
+tiles instead of requesting Carto tiles without a key.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
