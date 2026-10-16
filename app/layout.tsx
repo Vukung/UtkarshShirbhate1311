@@ -25,13 +25,13 @@ const vt323 = VT323({
 });
 
 export const metadata: Metadata = {
-  title: "Utkarsh Shirbhate | Software Engineer",
-  description: "Software Engineer specializing in Application & Data Engineering. Building scalable solutions.",
+  title: "Utkarsh Shirbhate | AI Automation & Software Engineer",
+  description: "I build LLM-powered automation pipelines and backend systems that cut manual work and run reliably.",
   keywords: ["Utkarsh Shirbhate", "Software Engineer", "Application Engineering", "Data Engineering", "Full Stack Developer", "React", "Node.js", "Portfolio"],
   authors: [{ name: "Utkarsh Shirbhate" }],
   openGraph: {
-    title: "Utkarsh Shirbhate | Software Engineer",
-    description: "Software Engineer specializing in Application & Data Engineering. Check out my projects and experience.",
+    title: "Utkarsh Shirbhate | AI Automation & Software Engineer",
+    description: "I build LLM-powered automation pipelines and backend systems that cut manual work and run reliably.",
     type: "website",
   },
   icons: {
@@ -68,6 +68,5 @@ export default function RootLayout({
     </html>
   );
 }
-
 
 

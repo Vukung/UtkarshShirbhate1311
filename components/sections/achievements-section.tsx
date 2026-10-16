@@ -17,6 +17,7 @@ const getIcon = (type: string) => {
             return Trophy;
         case "Certification":
         case "Academic":
+        case "Publication":
             return Award;
         default:
             return Award;
@@ -110,7 +111,7 @@ export function AchievementsSection() {
                                                 {item.link && (
                                                     <Button variant="outline" size="sm" className="mt-3 h-8 gap-1" asChild>
                                                         <a href={item.link} target="_blank" rel="noopener noreferrer">
-                                                            Verify <ExternalLink className="w-3 h-3" />
+                                                            {"linkLabel" in item ? item.linkLabel : "Verify"} <ExternalLink className="w-3 h-3" />
                                                         </a>
                                                     </Button>
                                                 )}

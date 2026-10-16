@@ -14,7 +14,7 @@ export function ProjectsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
             >
-                Academic Projects
+                Projects
             </motion.h2>
 
             <div className="relative border-l border-zinc-800 ml-3 space-y-16">
@@ -52,7 +52,7 @@ export function ProjectsSection() {
                                     <h3 className="text-xl sm:text-2xl font-bold text-foreground leading-tight">{project.title}</h3>
                                     <div className="flex flex-col">
                                         <span className="text-base sm:text-lg text-muted-foreground font-medium">
-                                            Academic Project
+                                            {project.type || "Project"}
                                         </span>
                                         <span className="text-xs sm:text-sm text-muted-foreground font-medium uppercase tracking-wide">
                                             {project.duration}
@@ -66,7 +66,9 @@ export function ProjectsSection() {
 
                                 {/* Description */}
                                 <div className="text-muted-foreground text-sm leading-relaxed space-y-3">
-                                    <p className="text-base text-muted-foreground">{project.description}</p>
+                                    {project.description && (
+                                        <p className="text-base text-muted-foreground">{project.description}</p>
+                                    )}
 
                                     {/* Stats / Impact (if exists) */}
                                     {project.stats && (
@@ -112,12 +114,14 @@ export function ProjectsSection() {
                                             </a>
                                         </Button>
                                     )}
-                                    <Button variant="outline" size="sm" className="h-8 border-zinc-700 bg-zinc-900/50 hover:bg-zinc-800 hover:text-white" asChild>
-                                        <a href={project.links.github} target="_blank" rel="noopener noreferrer">
-                                            <Github className="w-3.5 h-3.5 mr-2" />
-                                            GitHub
-                                        </a>
-                                    </Button>
+                                    {project.links.github && (
+                                        <Button variant="outline" size="sm" className="h-8 border-zinc-700 bg-zinc-900/50 hover:bg-zinc-800 hover:text-white" asChild>
+                                            <a href={project.links.github} target="_blank" rel="noopener noreferrer">
+                                                <Github className="w-3.5 h-3.5 mr-2" />
+                                                GitHub
+                                            </a>
+                                        </Button>
+                                    )}
                                 </div>
                             </div>
                         </motion.div>

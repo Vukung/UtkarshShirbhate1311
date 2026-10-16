@@ -70,7 +70,9 @@ export function ExperienceSection() {
                             <div className="flex flex-col gap-2">
                                 {/* Description */}
                                 <div className="text-muted-foreground text-sm leading-relaxed space-y-3">
-                                    <p className="text-base text-muted-foreground">{exp.description}</p>
+                                    {exp.description && (
+                                        <p className="text-base text-muted-foreground">{exp.description}</p>
+                                    )}
 
                                     {/* Highlights */}
                                     <ul className="list-disc list-outside ml-5 space-y-2">

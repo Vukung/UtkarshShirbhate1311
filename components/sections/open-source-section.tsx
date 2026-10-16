@@ -3,14 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { openSource } from "@/lib/data";
 import { motion } from "framer-motion";
-import { ChevronDown, ChevronUp, Download, ExternalLink, Github, Star, Users } from "lucide-react";
-import { useEffect, useState } from "react";
-
-interface GitHubStats {
-    stars: number | string;
-    downloads: number | string;
-    contributors: number | string;
-}
+import { ChevronDown, ChevronUp, Download, Github, Star, Users } from "lucide-react";
+import { useState } from "react";
 
 export function OpenSourceSection() {
     return (
@@ -35,84 +29,13 @@ export function OpenSourceSection() {
 
 function OpenSourceProjectCard({ project, index }: { project: typeof openSource[0], index: number }) {
     const [expandedIndex, setExpandedIndex] = useState<boolean>(false);
-    const [stats, setStats] = useState<GitHubStats>({
-        stars: project.stats.stars,
-        downloads: project.stats.downloads,
-        contributors: project.stats.contributors
-    });
+    const stats = project.stats;
 
     const toggleExpand = () => {
         setExpandedIndex(!expandedIndex);
     };
 
     const projectInitials = project.title.substring(0, 1).toUpperCase();
-
-    // Fetch real-time stats
-    useEffect(() => {
-        const fetchStats = async () => {
-            try {
-                // Extract owner/repo from GitHub link
-                // Expected format: https://github.com/owner/repo
-                const githubUrl = project.links.github;
-                if (!githubUrl || githubUrl === "#" || !githubUrl.includes("github.com")) return;
-
-                const urlParts = githubUrl.split("github.com/")[1].split("/");
-                const owner = urlParts[0];
-                const repo = urlParts[1];
-
-                if (!owner || !repo) return;
-
-                // 1. Fetch Repo Info (Stars)
-                const repoResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
-                const repoData = await repoResponse.json();
-
-                // 2. Fetch Contributors (Count length of page 1, max 100)
-                const contributorsResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/contributors?per_page=100`);
-                const contributorsData = await contributorsResponse.json();
-
-                // 3. Fetch Releases (Downloads)
-                const releasesResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases`);
-                const releasesData = await releasesResponse.json();
-
-                // Calculate Totals
-                const stars = repoData.stargazers_count || stats.stars;
-
-                let contributors = stats.contributors;
-                if (Array.isArray(contributorsData)) {
-                    contributors = contributorsData.length;
-                    // If maxed out at 100, add a plus sign
-                    if (contributors === 100) contributors = "100+";
-                }
-
-                let downloads = 0;
-                if (Array.isArray(releasesData)) {
-                    downloads = releasesData.reduce((acc: number, release: any) => {
-                        return acc + release.assets.reduce((sum: number, asset: any) => sum + asset.download_count, 0);
-                    }, 0);
-                }
-                // If no releases/downloads found but we have a baseline, keep baseline or use new?
-                // If 0, maybe keep baseline "300+" if the API didn't return anything useful (e.g. downloads not on GitHub).
-                // But user requested "real-time", so we should trust the API if it returns valid 0 (i.e. no releases).
-                // However, "300+" implies existing success. 
-                // Let's format it: if > 0, use it. if 0 and we have a string baseline, keep baseline?
-                // User said "300+ downloads" in data.ts. If repo has 0 release downloads, showing 0 might be wrong if they count npm downloads.
-                // For this specific request, I will show the API result if > 0, otherwise fallback to initial.
-                const finalDownloads = downloads > 0 ? downloads : stats.downloads;
-
-                setStats({
-                    stars,
-                    contributors,
-                    downloads: finalDownloads
-                });
-
-            } catch (error) {
-                console.error("Failed to fetch GitHub stats:", error);
-                // Fail silently and keep static data
-            }
-        };
-
-        fetchStats();
-    }, [project.links.github]); // Run once on mount (or if link changes)
 
     return (
         <motion.div
@@ -169,7 +92,7 @@ function OpenSourceProjectCard({ project, index }: { project: typeof openSource[
                 <div className="text-muted-foreground text-sm leading-relaxed space-y-3">
                     <p className="text-base text-muted-foreground">{project.description}</p>
 
-                    {/* Stats Row - Using Real-Time Stats */}
+                    {/* Stats recorded at the time of contribution */}
                     <div className="flex flex-wrap gap-4 py-1">
                         <div className="flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground">
                             <Download className="w-4 h-4 text-green-600 dark:text-green-500" />
@@ -187,6 +110,7 @@ function OpenSourceProjectCard({ project, index }: { project: typeof openSource[
                             <span>contributors</span>
                         </div>
                     </div>
+                    <p className="text-xs text-muted-foreground">at the time of contribution</p>
 
                     {/* Contributions (Highlights) */}
                     <ul className="list-disc list-outside ml-5 space-y-2">
@@ -272,15 +196,9 @@ function OpenSourceProjectCard({ project, index }: { project: typeof openSource[
                 {/* Links */}
                 <div className="flex gap-3 mt-4">
                     <Button variant="outline" size="sm" className="h-8 border-zinc-700 bg-zinc-900/50 hover:bg-zinc-800 hover:text-white" asChild>
-                        <a href={project.links.live} target="_blank" rel="noopener noreferrer">
-                            <ExternalLink className="w-3.5 h-3.5 mr-2" />
-                            Live Project
-                        </a>
-                    </Button>
-                    <Button variant="outline" size="sm" className="h-8 border-zinc-700 bg-zinc-900/50 hover:bg-zinc-800 hover:text-white" asChild>
                         <a href={project.links.github} target="_blank" rel="noopener noreferrer">
                             <Github className="w-3.5 h-3.5 mr-2" />
-                            GitHub
+                            GitHub (Merged PRs)
                         </a>
                     </Button>
                 </div>

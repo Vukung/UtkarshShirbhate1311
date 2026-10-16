@@ -10,6 +10,11 @@ const skillCategories = [
         colorClasses: "badge-blue",
     },
     {
+        title: "AI & Automation",
+        skills: skills.aiAutomation,
+        colorClasses: "badge-purple",
+    },
+    {
         title: "Frameworks",
         skills: skills.frameworks,
         colorClasses: "badge-green",
@@ -25,17 +30,22 @@ const skillCategories = [
         colorClasses: "badge-red",
     },
     {
+        title: "Data & Analytics",
+        skills: skills.dataAnalytics,
+        colorClasses: "badge-green",
+    },
+    {
         title: "Cloud & Deployment",
         skills: skills.cloud,
         colorClasses: "badge-blue",
     },
     {
-        title: "Data & ML (Applied / Exploratory)",
+        title: "Data & ML (Applied)",
         skills: skills.dataML,
         colorClasses: "badge-purple",
     },
     {
-        title: "Practices",
+        title: "Practices & Tooling",
         skills: skills.practices,
         colorClasses: "badge-yellow",
     },
