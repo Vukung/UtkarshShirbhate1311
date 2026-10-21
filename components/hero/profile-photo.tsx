@@ -4,6 +4,7 @@ import { useEasterEgg } from "@/contexts/easter-egg-context";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { assetPath } from "@/lib/asset-path";
 
 export function ProfilePhoto({ className }: { className?: string }) {
     const [showGlasses, setShowGlasses] = useState(false);
@@ -157,7 +158,8 @@ export function ProfilePhoto({ className }: { className?: string }) {
                     <Image
                         
                         
-                        src="/profile-glasses3.png"
+                        // src="/profile-glasses3.png"
+                        src={assetPath("/profile-glasses3.png")}
                         alt="Utkarsh Shirbhate"
                         fill
                         className="object-cover"
@@ -172,7 +174,8 @@ export function ProfilePhoto({ className }: { className?: string }) {
                     transition={{ duration: 0.2 }}
                 >
                     <Image
-                        src="/profile3.png"
+                        // src="/profile3.png"
+                        src={assetPath("/profile3.png")}
                         alt="Utkarsh Shirbhate with glasses"
                         fill
                         className="object-cover"

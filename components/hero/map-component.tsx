@@ -1,6 +1,7 @@
 "use client";
 
 import { personalInfo } from "@/lib/data";
+import { assetPath } from "@/lib/asset-path";
 import "leaflet/dist/leaflet.css";
 import { Clock, MapPin, Minus, Plus, Thermometer } from "lucide-react";
 import { useState } from "react";
@@ -156,7 +157,7 @@ export default function MapComponent({ currentTime, temperature, weatherConditio
                 }}
             >
                 <img
-                    src="/plane.webp"
+                    src={assetPath("/plane.webp")}
                     alt="Flying airplane"
                     width={60}
                     height={60}

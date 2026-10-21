@@ -3,6 +3,7 @@ import { XPManager } from "@/components/xp/xp-manager";
 import { EasterEggProvider } from "@/contexts/easter-egg-context";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { assetPath } from "@/lib/asset-path";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono, VT323 } from "next/font/google";
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/favicon.png",
+    icon: assetPath("/favicon.png"),
   },
 };
 
@@ -68,5 +69,4 @@ export default function RootLayout({
     </html>
   );
 }
-
 

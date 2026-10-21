@@ -4,7 +4,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
-  basePath: "/utkarsh-portfolio-website",
+  // GitHub Pages needs the repository path, while local development is served
+  // from the root.
+  basePath: process.env.NODE_ENV === "production" ? "/utkarsh-portfolio-website" : undefined,
   images: {
     unoptimized: true,
   },

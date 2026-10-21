@@ -2,6 +2,7 @@
 
 import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 import useSound from "use-sound";
+import { assetPath } from "@/lib/asset-path";
 
 interface EasterEgg {
     id: string;
@@ -44,7 +45,7 @@ export function EasterEggProvider({ children }: { children: React.ReactNode }) {
     const [orbs, setOrbs] = useState<Orb[]>([]);
 
     const soundOptions = React.useMemo(() => ({ volume: 0.8 }), []);
-    const [playLevelUp] = useSound("/xp.m4a", soundOptions);
+    const [playLevelUp] = useSound(assetPath("/xp.m4a"), soundOptions);
 
     // Play sound when toast appears
     useEffect(() => {

@@ -4,6 +4,7 @@ import { motion, useMotionValue } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import useSound from "use-sound";
+import { assetPath } from "@/lib/asset-path";
 
 interface XPOrbProps {
     id: string;
@@ -20,7 +21,7 @@ export function XPOrb({ id, startX, startY, variant, index, onCollect }: XPOrbPr
         playbackRate: 0.8 + (index * 0.1),
     }), [index]);
 
-    const [playCollect] = useSound("/xp.m4a", soundOptions);
+    const [playCollect] = useSound(assetPath("/xp.m4a"), soundOptions);
     const [phase, setPhase] = useState<"burst" | "magnet" | "collect">("burst");
     const [currentTargetX, setCurrentTargetX] = useState(0);
     const [currentTargetY, setCurrentTargetY] = useState(0);
@@ -161,7 +162,12 @@ export function XPOrb({ id, startX, startY, variant, index, onCollect }: XPOrbPr
             }}
         >
             <Image
-                src={variant === "green" ? "/Minecraft Green orb.png" : "/Minecraft Yellow orb.png"}
+                // src={variant === "green" ? "/Minecraft Green orb.png" : "/Minecraft Yellow orb.png"}
+                src={assetPath(
+                    variant === "green"
+                        ? "/Minecraft Green orb.png"
+                        : "/Minecraft Yellow orb.png"
+                )}
                 alt={`${variant} XP orb`}
                 width={24}
                 height={24}

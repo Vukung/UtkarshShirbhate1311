@@ -1,3 +1,5 @@
+import { assetPath } from "./asset-path";
+
 export const personalInfo = {
   name: "Utkarsh Shirbhate",
   role: "AI Automation & Software Engineer | n8n, Python, Node.js",
@@ -142,7 +144,8 @@ export const experience = [
       businessImpact: "The improved booking flow reduced user errors by about 30%, while the secure payment integration increased transaction success rates and user trust."
     },
     skills: ["React Native", "Node.js", "MongoDB", "Firebase", "OAuth", "Google Maps API", "Razorpay", "REST APIs"],
-    logo: "/PulseOn-EV Logo.jpg",
+    // logo: "/PulseOn-EV Logo.jpg",
+    logo: assetPath("/PulseOn-EV Logo.jpg"),
   },
   {
     company: "Campus Credentials",
