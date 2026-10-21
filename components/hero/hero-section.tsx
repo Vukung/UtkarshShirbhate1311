@@ -6,6 +6,8 @@ import { LocationWidget } from "./location-widget";
 import { ProfilePhoto } from "./profile-photo";
 import { SocialLinks } from "./social-links";
 
+import { assetPath } from "@/lib/asset-path";
+
 export function HeroSection() {
     return (
         <section className="pt-12 md:pt-20 pb-4">
