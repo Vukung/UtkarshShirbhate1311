@@ -187,7 +187,7 @@ export const openSource = [
       contributors: 6,
       stars: 17,
     },
-    logo: "/wallendar.ico",
+    logo: assetPath("/wallendar.ico"),
     duration: "Dec 2025 - Mar 2026",
     links: {
       github: "https://github.com/shm-dtt/wallendar/pulls?q=is%3Apr+author%3AVukung",
