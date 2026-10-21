@@ -45,6 +45,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isVercelDeployment = process.env.VERCEL === "1";
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -63,10 +65,9 @@ export default function RootLayout({
             <XPManager />
           </EasterEggProvider>
         </ThemeProvider>
-        <Analytics />
-        <SpeedInsights />
+        {isVercelDeployment && <Analytics />}
+        {isVercelDeployment && <SpeedInsights />}
       </body>
     </html>
   );
 }
-
