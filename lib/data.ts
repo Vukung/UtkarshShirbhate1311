@@ -120,6 +120,7 @@ export const experience = [
       "Forecast campaign demand from historical data to guide budget allocation",
     ],
     skills: ["Google Ads", "Meta Ads", "Advanced Excel", "Funnel Analysis", "Budget Forecasting"],
+    logo: assetPath("/aristok_logo.png"),
   },
   {
     company: "PulseOn-EV",
@@ -161,6 +162,7 @@ export const experience = [
       "Built an Admin Dashboard with Role-Based Access Control (RBAC) for content moderation",
     ],
     skills: ["React", "Node.js", "Express.js", "MySQL", "JWT", "Bcrypt", "RBAC"],
+    logo: assetPath("/campus_credentials_logo.jpg"),
   },
 ];
 
