@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   // GitHub Pages needs the repository path, while local development is served
   // from the root.
-  basePath: process.env.NODE_ENV === "production" ? "/utkarsh-portfolio-website" : undefined,
+  basePath: process.env.NODE_ENV === "production" ? "/UtkarshShirbhate1311" : undefined,
   images: {
     unoptimized: true,
   },

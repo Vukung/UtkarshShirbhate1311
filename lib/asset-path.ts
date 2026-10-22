@@ -1,5 +1,5 @@
 
-const BASE_PATH = "/utkarsh-portfolio-website";
+const BASE_PATH = "/UtkarshShirbhate1311";
 
 export function assetPath(path: string): string {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
